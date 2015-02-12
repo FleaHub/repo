@@ -1,0 +1,12 @@
+
+
+<p class="players">
+  <%= f.label :user_id, "Player" %><br />
+  <%= f.text_field :user_id %>
+  <%= f.select(:role,  [['Goalkeeper'],['Left back'],['Right back'], ['Central Defensor'],
+                              ['Midfielder'],['Offensive midfielder'],['Striker']]) %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to_function "Remove", "remove_players(this)" %>
+
+
+</p>

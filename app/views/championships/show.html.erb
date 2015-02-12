@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+<%= image_tag @championship.logo  %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @championship.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @championship.description %>
+</p>
+
+<p>
+  <b>Logo:</b>
+  <%= @championship.logo %>
+</p>
+
+<p>
+  <b>Admin:</b>
+  <%= @championship.user_id %>
+</p>
+
+<p>
+  <b>Team:</b>
+  <%= @championship.team_id %>
+</p>
+
+<% for team in @championship.teams %>
+    <b>Name:</b>
+    <li><%= team.name %></li>
+
+<% end %>
+
+
+
+<%= link_to 'Edit', edit_championship_path(@championship) %> |
+<%= link_to 'Back', championships_path %>

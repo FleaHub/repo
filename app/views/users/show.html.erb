@@ -1,0 +1,65 @@
+<% #Provide the page title in a symbol to application.html.erb to avoid duplication %>
+<% provide :title, @user.name %>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
+    <%= render 'follow_form' if signed_in? %>
+  </aside>
+
+  <div class="col-md-8">
+    <% if @user.posts.any? %>
+        <h3>Posts (<%= @user.posts.count %>)</h3>
+        <ol class="posts">
+          <%= render @posts %>
+        </ol>
+        <% # since we are in a Users view, we need to specify that the pagination is for the posts %>
+        <%= will_paginate @posts %>
+
+    <% end %>
+  </div>
+
+
+  <div class="col-md-8">
+    <% if @championships.any? %>
+        <h3>Championships: (<%= @championships.count %>):</h3>
+        <% @championships.each do |c| %>
+            <%= c.name %>
+            <%= c.description %>
+
+            <% if current_user?(@user) %>
+                <td><%= link_to "Show", championship_path %></td>
+                <td><%= link_to "Edit", edit_team_path(c) %></td>
+                <td><%= link_to "Remove", c, method: :delete, data: { confirm: "Are you sure?" } %></td>
+            <% end %>
+        <% end %>
+        <% end %>
+  </div>
+  <div class="col-md-8">
+    <% if @teams.any? %>
+        <h3>Team(<%= @teams.count %> ):</h3>
+        <% @teams.each do |team| %>
+            <%= team.name %>
+            <%= team.description %>
+
+            <% if current_user?(@user) %>
+            <td><%= link_to "Show", team %></td>
+            <td><%= link_to "Edit", edit_team_path(team) %></td>
+            <td><%= link_to "Remove", team, method: :delete, data: { confirm: "Are you sure?" } %></td>
+            <% end %>
+        <% end %>
+
+
+    <% end %>
+
+  </div>
+
+</div>

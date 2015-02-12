@@ -1,0 +1,43 @@
+<%= javascript_include_tag "application"%>
+<%= form_for(@championship) do |f| %>
+  <% if @championship.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@championship.errors.count, "error") %> prohibited this championship from being saved:</h2>
+
+      <ul>
+      <% @championship.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.file_field :logo%><br />
+  </div>
+      <div class="put">
+      <%= f.fields_for :teams do |builder| %>
+          <%= render 'team_fields', :f => builder %>
+          <p><%= link_to_add_fields "Add Answer", f , :teams %></p>
+      <% end %>
+
+      <div class="actions">
+      </div>
+
+
+
+
+
+<div class="actions">
+    <%= f.submit %>
+  </div>
+</div>
+<% end %>

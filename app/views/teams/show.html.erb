@@ -1,0 +1,43 @@
+
+
+<p id="notice"><%= notice %></p>
+<p>
+  <b>Name:</b>
+  <%=image_tag @team.arms %>
+</p>
+<p>
+  <b>Name:</b>
+  <%= @team.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @team.description %>
+  User id team :<%= @team.user_id %>
+
+</p>
+
+<% for player in @team.players %>
+    <b>Name:</b>
+    <li><%= player.user_id %></li>
+    <b>Role:</b>
+    <li><%= player.role %></li>
+    <b>Inspect</b>
+    <li><%= player.inspect %></li>
+    <strong>-----------------------</strong>
+
+
+
+<% end %>
+
+
+
+<% if @check_user==@team.user_id %>
+    <%= link_to 'Edit', edit_team_path(@team) %> |
+    <%= button_to 'Destroy', @team, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+
+
+<%= link_to 'Back', teams_path %>
+
+
